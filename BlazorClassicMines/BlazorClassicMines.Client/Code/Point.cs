@@ -11,9 +11,9 @@
         public bool Shine { get; private set; } = false;
 
         public string CssClass =>
-            (Shine ? " svitit" : "") +
-            (Typ == 9 ? " mina" : "") +
-            (Typ > 0 ? $" cislo-{Typ}" : "");
+            (Shine ? " shine" : "") +
+            (Typ == 9 ? " mine" : "") +
+            (Typ > 0 ? $" number-{Typ}" : "");
 
         public int X { get; init; }
         public int Y { get; init; }

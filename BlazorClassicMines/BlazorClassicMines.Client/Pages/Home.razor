@@ -1,7 +1,110 @@
 ﻿@page "/"
+@page "/p/{Parametry?}"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Minesweeper</PageTitle>
 
-<h1>Hello, world!</h1>
+<h2>Minesweeper</h2>
 
-Welcome to your new app.
+
+
+@if (HP == null || HP.Status == StatusGames.Loading)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div>
+        <table class="tab" cellpadding="0" cellspacing="0">
+            @for (int i = 0; i < HP.WindowHeight; i++)
+            {
+                <tr>
+                    @for (int j = 0; j < HP.WindowHeight; j++)
+                    {
+                        var cell = HP.Minefield[i, j];
+                        <td>
+                            @if (cell.Uncovered)
+                            {
+                                <div class="cell cellExposed@(cell.CssClass)">
+                                    @switch (cell.Typ)
+                                    {
+                                        case 9:
+                                            <span>X</span>
+                                            break;
+                                        case 0:
+                                            <span>&nbsp;</span>
+                                            break;
+                                        default:
+                                            <span>@cell.Typ</span>
+                                            break;
+                                    }
+                                </div>
+                            }
+                            else if (HP.Status == StatusGames.Progress)
+                            {
+                                <div class="cell cellUncovered"
+                                     @onclick="()=> cell.Discover(true)"
+                                     @oncontextmenu="() => cell.TagPoint()"
+                                     @oncontextmenu:preventDefault>
+                                     @(cell.Marked ? "!" : "")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="cell cellUncovered">
+                                    @(cell.Marked ? "!" : "")
+                                </div>
+                            }
+
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+
+
+    @if (HP.Status == StatusGames.Win)
+    {
+        <h3 class="victory">Victories!!!</h3>
+    }
+    else if (HP.Status == StatusGames.Loss)
+    {
+        <h3 class="loss">Losser!!!</h3>
+    }
+
+    <button type="button" @onclick="() => HP.CreateField()">Restart</button>
+}
+
+@code {
+    PlayersDesktop HP;
+
+    [Parameter]
+    public string? Parametry { get; set; }
+
+    protected override void OnInitialized()
+    {
+        HP = new PlayersDesktop()
+            {
+                WindowWidth = 15,
+                WindowHeight = 15,
+                NumberMine = 10,
+            };
+
+        if (!String.IsNullOrWhiteSpace(Parametry))
+        {
+            var prms = Parametry.Split('x')
+                .Select(x => (int.TryParse(x, out int i) ? i : 0))
+                .Where(x => x > 0)
+                .ToArray();
+            if (prms.Length == 1)
+                HP.NumberMine = prms[0];
+            if (prms.Length == 2)
+                (HP.WindowHeight, HP.WindowWidth, HP.NumberMine) = (prms[0], prms[0], prms[1]);
+            if (prms.Length == 3)
+                (HP.WindowHeight, HP.WindowWidth, HP.NumberMine) = (prms[0], prms[1], prms[2]);
+        }
+
+        HP.CreateField();
+        base.OnInitialized();
+    }
+}

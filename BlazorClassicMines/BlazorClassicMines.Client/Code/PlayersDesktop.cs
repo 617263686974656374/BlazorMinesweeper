@@ -8,11 +8,11 @@
         public int WindowWidth { get; set; }
         public int WindowHeight { get; set; }
         public int NumberMine { get; set; }
-        public StatusGames Stav { get; set; } = StatusGames.Loading;
+        public StatusGames Status { get; set; } = StatusGames.Loading;
 
-        public void VytvorPole()
+        public void CreateField()
         {
-            Stav = StatusGames.Loading;
+            Status = StatusGames.Loading;
 
             // Creating and placing cells
             Minefield = new Point[WindowHeight, WindowWidth];
@@ -37,7 +37,7 @@
 
             }
 
-            Stav = StatusGames.Progress;
+            Status = StatusGames.Progress;
         }
 
         Queue<Point> queue = new Queue<Point>();
@@ -59,7 +59,7 @@
                     if (!b.Uncovered && b.Typ == 9)
                         b.Discover(false);
 
-                Stav = StatusGames.Loss;
+                Status = StatusGames.Loss;
                 return;
             }
 
@@ -67,7 +67,7 @@
             foreach (var b in Minefield)
                 if (!b.Uncovered && b.Typ != 9)
                     return;
-            Stav = StatusGames.Win;
+            Status = StatusGames.Win;
         }
 
         private void RevealCellAndNeighbors()
