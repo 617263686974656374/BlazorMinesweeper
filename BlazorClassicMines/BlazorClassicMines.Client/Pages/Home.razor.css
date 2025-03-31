@@ -1,0 +1,80 @@
+﻿
+.tab {
+    border: 1px solid black;
+}
+
+.cell {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid dimgray;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.cellExposed {
+    background-color: #EEEEEE;
+}
+
+.cellUncovered {
+    background-color: #CCCCCC;
+    cursor: pointer;
+    color: red;
+}
+
+.mine {
+    background-color: black;
+    color: white;
+}
+
+.shine {
+    background-color: red;
+}
+
+.number-1 {
+    color: blue;
+}
+
+.number-2 {
+    color: green;
+}
+
+.number-3 {
+    color: red;
+}
+
+.number-4 {
+    color: navy;
+}
+
+.number-5 {
+    color: darkred;
+}
+
+.number-6 {
+    color: darkcyan;
+}
+
+.number-7 {
+    color: black;
+}
+
+.number-8 {
+    color: gray;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+    h3.loss {
+        color: red;
+    }
+
+    h3.win {
+        color: green;
+    }
