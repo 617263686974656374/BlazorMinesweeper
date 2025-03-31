@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35716.79 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClassicMines", "BlazorClassicMines\BlazorClassicMines\BlazorClassicMines.csproj", "{52A9DEEB-D055-4F0E-8622-BCF36E0F9F72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClassicMines.Client", "BlazorClassicMines\BlazorClassicMines.Client\BlazorClassicMines.Client.csproj", "{93DA72F0-D18C-4C77-9B6F-D78B759CA053}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52A9DEEB-D055-4F0E-8622-BCF36E0F9F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A9DEEB-D055-4F0E-8622-BCF36E0F9F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A9DEEB-D055-4F0E-8622-BCF36E0F9F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A9DEEB-D055-4F0E-8622-BCF36E0F9F72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93DA72F0-D18C-4C77-9B6F-D78B759CA053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93DA72F0-D18C-4C77-9B6F-D78B759CA053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93DA72F0-D18C-4C77-9B6F-D78B759CA053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93DA72F0-D18C-4C77-9B6F-D78B759CA053}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5308C44C-E962-4207-A7DD-6A6267F79D10}
+	EndGlobalSection
+EndGlobal
