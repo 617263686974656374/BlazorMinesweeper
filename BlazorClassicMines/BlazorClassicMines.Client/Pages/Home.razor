@@ -5,6 +5,9 @@
 
 <h2>Minesweeper</h2>
 
+<p>Time: @ElapsedFormatted</p>
+
+<p>Mines left: @HP.MinesLeft</p>
 
 
 @if (HP == null || HP.Status == StatusGames.Loading)
@@ -51,7 +54,7 @@ else
                             else
                             {
                                 <div class="cell cellUncovered">
-                                    @(cell.Marked ? "!" : "")
+                                    @(cell.Marked ? "🚩" : "")
                                 </div>
                             }
 
@@ -72,11 +75,29 @@ else
         <h3 class="loss">Losser!!!</h3>
     }
 
-    <button type="button" @onclick="() => HP.CreateField()">Restart</button>
+    @if (HP.Status == StatusGames.Win)
+    {
+        <h3 class="win">Victory!</h3>
+        <button @onclick="RestartGame">Play Again</button>
+    }
+    else if (HP.Status == StatusGames.Loss)
+    {
+        <h3 class="loss">Game Over!</h3>
+        <button @onclick="RestartGame">Try Again</button>
+    }
+
+
 }
 
 @code {
     PlayersDesktop HP;
+
+    private Timer? timer;
+
+    private string ElapsedFormatted => HP?.StartTime.HasValue == true
+    ? $"{(int)HP.Elapsed.TotalMinutes:D2}:{HP.Elapsed.Seconds:D2}"
+    : "00:00";
+
 
     [Parameter]
     public string? Parametry { get; set; }
@@ -105,6 +126,35 @@ else
         }
 
         HP.CreateField();
+
+        timer = new Timer(_ =>
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+            StopTimerIfGameOver();
+        });
+    }, null, 0, 1000);
         base.OnInitialized();
+    }
+
+    private void StopTimerIfGameOver()
+    {
+        if (HP.Status == StatusGames.Win || HP.Status == StatusGames.Loss)
+        {
+            timer?.Change(Timeout.Infinite, Timeout.Infinite); // zastaví timer
+        }
+    }
+    private void RestartGame()
+    {
+        HP.CreateField(); // reset herného poľa
+        timer?.Change(0, 1000); // znovu spustí timer
+    }
+
+
+
+    public void Dispose()
+    {
+        timer?.Dispose();
     }
 }

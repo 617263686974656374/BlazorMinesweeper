@@ -10,9 +10,18 @@
         public int NumberMine { get; set; }
         public StatusGames Status { get; set; } = StatusGames.Loading;
 
+        public DateTime? StartTime { get; private set; }
+        public TimeSpan Elapsed => StartTime.HasValue ? DateTime.Now - StartTime.Value : TimeSpan.Zero;
+
+        public int FlagsPlaced => Minefield.Cast<Point>().Count(p => p.Marked);
+        public int MinesLeft => NumberMine - FlagsPlaced;
+
+
+
         public void CreateField()
         {
             Status = StatusGames.Loading;
+            StartTime = DateTime.Now;
 
             // Creating and placing cells
             Minefield = new Point[WindowHeight, WindowWidth];
@@ -31,7 +40,7 @@
 
                 // Numbering of items adjacent to mines
                 for (int i = Math.Max(y - 1, 0); i <= Math.Min(y + 1, WindowHeight - 1); i++)
-                    for (int j = Math.Max(x - 1, 0); i <= Math.Min(x + 1, WindowWidth - 1); i++)
+                    for (int j = Math.Max(x - 1, 0); j <= Math.Min(x + 1, WindowWidth - 1); j++)
                         if (Minefield[i, j].Typ != 9)
                             Minefield[i, j].Typ++;
 
