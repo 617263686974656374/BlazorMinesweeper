@@ -142,12 +142,12 @@ else
     {
         if (HP.Status == StatusGames.Win || HP.Status == StatusGames.Loss)
         {
-            timer?.Change(Timeout.Infinite, Timeout.Infinite); // zastaví timer
+            timer?.Change(Timeout.Infinite, Timeout.Infinite); // stops the timer
         }
     }
     private void RestartGame()
     {
-        HP.CreateField(); // reset herného poľa
+        HP.CreateField(); // reset the game field
         timer?.Change(0, 1000); // restarts the timer
     }
 
