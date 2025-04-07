@@ -2,7 +2,9 @@
 {
     public class Point
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Uncovered { get; private set; }
 
         public bool Marked { get; private set; }
